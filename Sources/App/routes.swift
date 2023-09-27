@@ -27,8 +27,8 @@ func routes(_ app: Application) throws {
     // http://127.0.0.1:8080/movies/year/youryear/genre/yourgenrehere
     app.get("movies", "year", ":year", "genre", ":genre") { req -> String in
         
-        guard let genre = req.parameters.get("genre"),
-                let year = req.parameters.get("year")
+        guard let genre = req.parameters.get("genre",as: String.self),
+              let year = req.parameters.get("year", as: String.self)
         else {
             throw Abort(.badRequest)
         }
