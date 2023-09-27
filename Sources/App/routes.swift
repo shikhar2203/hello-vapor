@@ -94,6 +94,16 @@ func routes(_ app: Application) throws {
         return "User id = \(uid)"
     }
     
+    // strongly typed route parameter
+    // /users/rollno
+    users.get(":roll") { req in
+        guard let rollno = req.parameters.get("roll", as: Int.self)  else {
+            throw Abort(.badRequest)
+        }
+        
+        return "\(rollno)"
+    }
+    
     // POST users
     users.post { req in
         return "POST"
